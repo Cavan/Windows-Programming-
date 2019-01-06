@@ -115,7 +115,18 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="app.cpp" />
+    <ClCompile Include="log.cpp" />
+    <ClCompile Include="serviceLocator.cpp" />
+    <ClCompile Include="window.cpp" />
     <ClCompile Include="WinMain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="app.h" />
+    <ClInclude Include="Expected.h" />
+    <ClInclude Include="log.h" />
+    <ClInclude Include="serviceLocator.h" />
+    <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
