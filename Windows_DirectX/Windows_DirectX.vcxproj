@@ -70,7 +70,7 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Lua\x64;$(IncludePath);</IncludePath>
+    <IncludePath>$(VC_IncludePath);$(WindowsSDK_IncludePath);C:\Lua\x64\include;$(IncludePath);</IncludePath>
     <ReferencePath>$(VC_ReferencesPath_x64);C:\Lua\x64;$(ReferencesPath);</ReferencePath>
     <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);$(NETFXKitsDir)Lib\um\x64;C:\Lua\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>

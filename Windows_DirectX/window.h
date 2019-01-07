@@ -1,64 +1,51 @@
-#ifndef WINDOW
-#define WINDOW
+#pragma once
 
+/****************************************************************************************
+* Author:	Gilles Bellot
+* Date:		08/03/2016 - Dortmund - Germany
+*
+* Desc:		the Window class handles Windows related stuff, such as window creation and event handling
+*
+****************************************************************************************/
 
-/* FILE: window.h
- * PROJECT: DirectX Programming
- * PROGRAMMER: Cavan Biggs
- * FIRST VERSION: January 5th 2019
- * DESCRIPTION: Following a tutorial found at - https://bell0bytes.eu/a-real-world-windows-application/
- *			    To better understand windows programming, and other low level operations.
- *
- *
- *
- *
- *
-*/
-
-// INCLUDES
+// INCLUDES /////////////////////////////////////////////////////////////////////////////
 
 // windows
 #include <Windows.h>
 
-// Utility class
-#include "Expected.h"
+// bell0bytes util
+#include "expected.h"
 
 namespace core
 {
-	//Class definition
-	class DirectXApp; 
+	// DEFINITIONS //////////////////////////////////////////////////////////////////////////
+	class DirectXApp;
 
-	//Classes
+	// CLASSES //////////////////////////////////////////////////////////////////////////////
 	class Window
 	{
 	private:
-		HWND mainWindow;				// handle to the main window 
-		DirectXApp* dxApp;				// the core application class
+		HWND mainWindow;						// handle to the main window
+		DirectXApp* dxApp;						// the core application class
 
-		util::Expected<void> init();	// initializes the window
+		// resolution
+		int clientWidth;						// desired client resolution
+		int clientHeight;		
+
+		util::Expected<void> init();			// initializes the window
+		void readDesiredResolution();			// gets desired screen resolution from config file			
 
 	public:
 		// constructor and destructor
 		Window(DirectXApp* dxApp);
 		~Window();
 
-		//getters 
+		// getters
 		inline HWND getMainWindowHandle() { return mainWindow; };
 
 		// the call back function
 		virtual LRESULT CALLBACK msgProc(HWND hWnd, unsigned int msg, WPARAM wParam, LPARAM lParam);
-		
+
 		friend class DirectXApp;
-
-
-
 	};
 }
-
-
-
-
-
-
-
-#endif

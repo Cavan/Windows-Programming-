@@ -1,27 +1,4 @@
-#ifndef EXPECTED
-#define EXPECTED
-
-
-/* FILE: Expected.h
- * PROJECT: Windows and DirectX programming
- * PROGRAMMER: Cavan Biggs
- * FIRST VERSION: December 22nd 2018
- * DESCRIPTION: This file contains a method for handling errors, and described on the website
-				https://bell0bytes.eu/expected/ as an alternative to just throwing the C++ default exceptions
-				which have been shown to use a large amount of resources, the method below is a way to combat this problem.
- *
- *
- *
- *
- *
-*/
-
-
-
-
-
-
-
+#pragma once
 
 /****************************************************************************************
 * Author:	Gilles Bellot
@@ -103,7 +80,7 @@ namespace util
 
 		// creating expect from exceptions
 		template<typename E>
-		Expected<T>(E const& e) : spam(std::make_exception_ptr(e)), gotResult(false) { }
+		Expected<T>(E const& e) : spam(std::make_exception_ptr(e)) { }
 
 		template<class E>
 		static Expected<T> fromException(const E& exception)
@@ -207,8 +184,5 @@ namespace util
 		bool isValid() const { return !spam; }
 		bool wasSuccessful() const { return !spam; }
 		void get() const { if (!isValid()) std::rethrow_exception(spam); }
-		void suppress() {}
 	};
 }
-
-#endif // !EXPECTED

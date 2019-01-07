@@ -30,6 +30,11 @@
 #include "serviceLocator.h"						// enables global access to services
 
 
+// Lua
+#include <lua.hpp>
+#pragma comment(lib, "liblua53.a")
+
+
 // DEFINITIONS
 
 
@@ -60,6 +65,14 @@ public:
 // WinMain
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nShowCmd)
 {
+	// Lua Test
+	lua_State *state = luaL_newstate();
+	lua_close(state);
+	return 0;
+	// Lua Test
+
+
+
 	// try to start the logging service; if this fails, abort the application!
 	try { startLoggingService(); }
 	catch (std::runtime_error)

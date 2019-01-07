@@ -1,6 +1,4 @@
-#ifndef SERVICE_LOCATOR
-#define SERVICE_LOCATOR
-
+#pragma once
 
 /****************************************************************************************
 * Author:	Gilles Bellot
@@ -25,13 +23,10 @@ namespace util
 	{
 	private:
 		static std::shared_ptr<Logger<FileLogPolicy> > fileLogger;		// the file logger
-
+		
 	public:
-
 		// file logging services
-		static Logger<FileLogPolicy>* getFileLogger() { return fileLogger.get(); };								// returns the file logger
-		static void provideFileLoggingService(std::shared_ptr<Logger<FileLogPolicy> > providedFileLogger);		// sets the file logging service to the given logger
+		static Logger<FileLogPolicy>* getFileLogger() { return fileLogger.get(); };							// returns the file logger
+		static void provideFileLoggingService(std::shared_ptr<Logger<FileLogPolicy> > providedFileLogger);	// sets the file logging service to the given logger
 	};
 }
-
-#endif

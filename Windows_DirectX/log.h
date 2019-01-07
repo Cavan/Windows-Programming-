@@ -1,6 +1,4 @@
-#ifndef LOG
-#define LOG
-
+#pragma once
 
 /****************************************************************************************
 * Author:	Gilles Bellot
@@ -73,6 +71,7 @@ namespace util
 		debug,
 		warning,
 		error,
+		config
 	};
 
 	/////////////////////////////////////////////////////////////////////////////////////
@@ -150,7 +149,7 @@ namespace util
 	{
 #ifndef NDEBUG
 		// print closing message
-		util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("The file logger was shut down.");
+		util::ServiceLocator::getFileLogger()->print<util::SeverityType::info>("The file logger was destroyed.");
 #endif
 		// terminate the daemon by clearing the still running flag and letting it join to the main thread
 		isStillRunning.clear();
@@ -180,35 +179,39 @@ namespace util
 	{
 		std::stringstream logStream;
 
-		// get time
-		SYSTEMTIME localTime;
-		GetLocalTime(&localTime);
-
-		// header: line number and date (x: xx/xx/xxxx xx:xx:xx)
-		if (logLineNumber != 0)
-			logStream << "\r\n";
-		logStream << logLineNumber++ << ": " << localTime.wDay << "/" << localTime.wMonth << "/" << localTime.wYear << " " << localTime.wHour << ":" << localTime.wMinute << ":" << localTime.wSecond << "\t";
-
-		// write down warning level
-		switch (severity)
+		// all severity types but the config type allow custom formatting
+		if (!(severity == SeverityType::config))
 		{
-		case SeverityType::info:
-			logStream << "INFO:    ";
-			break;
-		case SeverityType::debug:
-			logStream << "DEBUG:   ";
-			break;
-		case SeverityType::warning:
-			logStream << "WARNING: ";
-			break;
-		case SeverityType::error:
-			logStream << "ERROR:   ";
-			break;
-		};
+			// get time
+			SYSTEMTIME localTime;
+			GetLocalTime(&localTime);
 
-		// write thread name
-		logStream << threadName[std::this_thread::get_id()] << ":\t";
+			// header: line number and date (x: xx/xx/xxxx xx:xx:xx)
+			if (logLineNumber != 0)
+				logStream << "\r\n";
+			logStream << logLineNumber++ << ": " << localTime.wDay << "/" << localTime.wMonth << "/" << localTime.wYear << " " << localTime.wHour << ":" << localTime.wMinute << ":" << localTime.wSecond << "\t";
 
+			// write down warning level
+			switch (severity)
+			{
+			case SeverityType::info:
+				logStream << "INFO:    ";
+				break;
+			case SeverityType::debug:
+				logStream << "DEBUG:   ";
+				break;
+			case SeverityType::warning:
+				logStream << "WARNING: ";
+				break;
+			case SeverityType::error:
+				logStream << "ERROR:   ";
+				break;
+			};
+
+			// write thread name
+			logStream << threadName[std::this_thread::get_id()] << ":\t";
+		}
+		
 		// write the actual message
 		logStream << stream.str();
 		std::lock_guard<std::timed_mutex> lock(writeMutex);
@@ -224,5 +227,3 @@ namespace util
 		this->print<severity>(std::stringstream(stream.str()));
 	}
 }
-
-#endif
