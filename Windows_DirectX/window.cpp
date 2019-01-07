@@ -87,13 +87,13 @@ namespace core
 		wc.cbClsExtra = 0;										// no extra bytes needed
 		wc.cbSize = sizeof(WNDCLASSEX);							// size of the window description structure
 		wc.cbWndExtra = 0;										// no extra bytes needed
-		wc.hbrBackground = (HBRUSH)GetStockObject(NULL_BRUSH);	// brush to repaint the background with
+		wc.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);	// brush to repaint the background with
 		wc.hCursor = LoadCursor(0, IDC_ARROW);					// load the standard cursor
 		wc.hIcon = LoadIcon(0, IDI_APPLICATION);				// load the standard application icon
 		wc.hIconSm = LoadIcon(0, IDI_APPLICATION);				// load the standard small application
 		wc.hInstance = dxApp->appInstance;						// handle to the core application instance
 		wc.lpfnWndProc = mainWndProc;							// window procedure function
-		wc.lpszClassName = (LPCSTR)"DirectXPrograming";			// class name
+		wc.lpszClassName = L"DirectXPrograming";			// class name
 		wc.lpszMenuName = 0;									// no menu
 		wc.style = CS_HREDRAW | CS_VREDRAW;						// send WM_SIZE message when either the height or the width of the client area are changed
 
@@ -103,7 +103,7 @@ namespace core
 			return std::invalid_argument("The window class could not be registered; most probably due to invalid arguments!");
 		}
 		// create the window
-		mainWindow = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, wc.lpszClassName, (LPCSTR)"DirectXPrograming", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, dxApp->appInstance, NULL);
+		mainWindow = CreateWindowEx(WS_EX_OVERLAPPEDWINDOW, wc.lpszClassName, L"DirectXPrograming", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, NULL, NULL, dxApp->appInstance, NULL);
 		if (!mainWindow)
 		{
 			return std::invalid_argument("The window could not be created; most probably due to invalid arguments!");
