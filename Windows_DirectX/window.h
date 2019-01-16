@@ -32,6 +32,12 @@ namespace core
 		int clientWidth;						// desired client resolution
 		int clientHeight;		
 
+		// window states
+		bool isMinimized;						// true if the window is minimized
+		bool isMaximized;						// true if the window is maximized
+		bool isResizing;						// true if the window is being dragged around by the mouse
+
+
 		util::Expected<void> init();			// initializes the window
 		void readDesiredResolution();			// gets desired screen resolution from config file			
 

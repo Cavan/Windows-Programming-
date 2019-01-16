@@ -39,6 +39,9 @@ namespace core
 		std::wstring pathToConfigurationFiles;	// path to the folder containing the configuration files
 		bool validConfigurationFile;			// true if there was a valid configuration file at startup
 
+		// game state
+		bool isPaused;							// true if the game is paused 
+
 		// constructor and destructor
 		DirectXApp(HINSTANCE hInstance);
 		~DirectXApp();
@@ -49,6 +52,9 @@ namespace core
 		// virtual methods, must be overridden
 		virtual util::Expected<void> init();								// initializes the DirectX application
 		virtual void shutdown(util::Expected<void>* expected = NULL);		// clean up and shutdown the DirectX application
+
+		// resize functions
+		void onResize();						// resize game graphics
 
 		// helper functions
 		bool getPathToMyDocuments();			// stores the path to the My Documents folder in the appropriate member variable

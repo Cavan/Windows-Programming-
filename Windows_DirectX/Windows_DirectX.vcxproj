@@ -122,6 +122,7 @@
     <ClCompile Include="app.cpp" />
     <ClCompile Include="log.cpp" />
     <ClCompile Include="serviceLocator.cpp" />
+    <ClCompile Include="stringConverter.cpp" />
     <ClCompile Include="window.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
@@ -130,6 +131,7 @@
     <ClInclude Include="Expected.h" />
     <ClInclude Include="log.h" />
     <ClInclude Include="serviceLocator.h" />
+    <ClInclude Include="stringConverter.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
